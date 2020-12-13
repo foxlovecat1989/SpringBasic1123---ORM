@@ -13,13 +13,14 @@
 
 # --- Entity對應資料表 原理 ---
 # 3. RowMapper 只能對應單一資料表
--> [Item{id=1, amount=5, product=null, invoice=null}, .......
+result -> [Item{id=1, amount=5, product=null, invoice=null}, .......
 
 # 4. 複數資料表時:
 -> 必須自訂 class implements RowMapper - override -> mapRow(ResultSet rs, int i) throws SQLException {
+result -> [Item{id=1, amount=5, product=ItemProduct{id=1, text=Pen, price=10, inventory=20}, invoice=Invoice{id=1, date=null}},
 
 # 5. 問題: 當關聯資料表 關聯過多 怎麼辦?
--> SimpleFlatMapper
+-> 使用SimpleFlatMapper
 
 
 
