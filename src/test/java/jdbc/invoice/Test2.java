@@ -1,6 +1,6 @@
 package jdbc.invoice;
 
-import com.mycompany.springbasic1123.invoice.entity.Item;
+import com.mycompany.springbasic1123.jdbc.invoice.entity.Item;
 import java.util.List;
 import org.junit.Test;
 import org.simpleflatmapper.jdbc.spring.JdbcTemplateMapperFactory;

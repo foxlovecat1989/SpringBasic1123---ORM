@@ -1,8 +1,8 @@
 package jdbc.invoice;
 
-import com.mycompany.springbasic1123.invoice.entity.Invoice;
-import com.mycompany.springbasic1123.invoice.entity.Item;
-import com.mycompany.springbasic1123.invoice.entity.ItemProduct;
+import com.mycompany.springbasic1123.jdbc.invoice.entity.Invoice;
+import com.mycompany.springbasic1123.jdbc.invoice.entity.Item;
+import com.mycompany.springbasic1123.jdbc.invoice.entity.ItemProduct;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;

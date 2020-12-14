@@ -1,4 +1,4 @@
-package com.mycompany.springbasic1123.invoice.entity;
+package com.mycompany.springbasic1123.jdbc.invoice.entity;
 
 public class ItemProduct {
     private Integer id;
