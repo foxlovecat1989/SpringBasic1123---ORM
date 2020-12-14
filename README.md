@@ -69,7 +69,57 @@ ORDER BY subtotal DESC
 FETCH FIRST 1 ROWS ONLY
 
 # 7. 練習 Java8 stream & groupingBy
-
+ // 每一張發票有那些商品?
+        // 使用 Java 8 grouping by
+        System.out.println("每一張發票有那些商品?");
+        System.out.println(
+                items
+                    .stream()
+                    .collect(groupingBy(item -> item.getInvoice().getId(), Collectors.toList()))
+        );
+        
+        //每一張發票有幾件商品?
+        System.out.println("每一張發票有幾件商品?");
+        System.out.println(
+                items
+                    .stream()
+                    .collect(groupingBy(item -> item.getInvoice().getId(), Collectors.counting()))
+        
+        );
+        
+        //每一樣商品各賣了多少?
+        System.out.println("每一樣商品各賣了多少?");
+        
+               Map<String, Integer> map = 
+                    items.stream()
+                    .collect(groupingBy(item -> item.getProduct().getText(), 
+                            Collectors.summingInt( item -> item.getAmount() * item.getProduct().getPrice())));
+      
+        System.out.println(map);
+        //哪一件商品賣得錢最多?
+        System.out.println("哪一件商品賣得錢最多?");
+        String max = map.entrySet()
+                                .stream()
+                                .max(Comparator.comparing(entry -> entry.getValue()))
+                                .get()
+                                .getKey();
+        System.out.println(max);
+        
+        //每一張發票價值多少?
+        System.out.println("每一張發票價值多少?");
+        Map<Integer, Integer> map2 = 
+                        items.stream()
+                             .collect(groupingBy(item -> item.getInvoice().getId(), Collectors.summingInt(item -> item.getAmount() * item.getProduct().getPrice())));
+        System.out.println(map2);
+        
+        //哪一張發票價值最高?
+        System.out.println("哪一張發票價值最高?"); 
+        Integer maxInvoice = 
+                    map2.entrySet().stream()
+                            .max(Comparator.comparing(entry -> entry.getValue() ))
+                            .get()
+                            .getKey();
+        System.out.println(maxInvoice);
 
 
 
