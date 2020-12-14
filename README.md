@@ -35,6 +35,40 @@ result -> [Item{id=1, amount=5, product=ItemProduct{id=1, text=Pen, price=10, in
                 + "FROM Item im, Invoice inv, ItemProduct ip\n"
                 + "WHERE im.INVID=inv.ID AND im.IPID=ip.ID";
         List<Item> items = jdbcTemplate.query(sql, mapper);
+        
+# 6. 練習 SQL
+--每一張發票有那些商品?
+SELECT inv.ID, ip.TEXT 
+FROM INVOICE as inv, ITEMPRODUCT as ip, ITEM as im
+WHERE inv.ID = im.INVID AND im.IPID = ip.ID;
+
+--每一張發票有幾項商品?
+SELECT inv.ID, count(ip.TEXT) as amount
+FROM INVOICE as inv, ITEMPRODUCT as ip, ITEM as im
+WHERE inv.ID = im.INVID AND im.IPID = ip.ID
+GROUP BY inv.ID;
+
+--每一張發票價值多少?
+SELECT inv.ID, SUM(ip.PRICE * im.AMOUNT) as subtotal
+FROM INVOICE as inv, ITEMPRODUCT as ip, ITEM as im
+WHERE inv.ID = im.INVID AND im.IPID = ip.ID
+GROUP BY inv.ID;
+
+--每一樣商品各賣了多少?
+SELECT ip.TEXT, SUM(ip.PRICE * im.AMOUNT) as subtotal
+FROM Item as im, ITEMPRODUCT as ip
+WHERE im.IPID = ip.ID
+GROUP BY ip.TEXT;
+
+--哪一件商品賣得錢最多?
+SELECT ip.TEXT, SUM(ip.PRICE * im.AMOUNT) as subtotal
+FROM Item as im, ITEMPRODUCT as ip
+WHERE im.IPID = ip.ID
+GROUP BY ip.TEXT
+ORDER BY subtotal DESC
+FETCH FIRST 1 ROWS ONLY
+
+# 7. 練習 Java8 stream & groupingBy
 
 
 
